@@ -1,3 +1,9 @@
+<%-- 
+    Document   : formLogin
+    Created on : 01/11/2022, 13:50:57
+    Author     : felip
+--%>
+
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -36,50 +42,31 @@
             </div>
             
             <div id="conteudo" class="bg-background">
-                <form action="gerenciarPerfil" method="POST" 
-                      accept-charset="iso-8859-1,utf-8">
-                    <h3 class="text-center mt-5">Cadastro de Perfil</h3>
+                <form action="gerenciarLogin" method="POST"accept-charset="iso-8859-1,utf-8">
+                    <h3 class="text-center mt-5">Pagina Login</h3>
                     
                     <input type="hidden" id="idperfil" name="idPerfil" 
                            value="${perfil.idPerfil}">
                     
                     <div class="form-group row offset-md-2 mt-4">
-
-                        <label for="idnome"class="col-md-2 form-label btn btn-primary btn-md">Nome</label>
+                        <label for="idnome" 
+                               class="col-md-2 form-label btn btn-primary btn-md">Nome</label>
                         <div class="col-md-6">
-                            <input type="text" name="nome" id="idnome" class="form-control" value="${perfil.nome}"> 
+                            <input type="text" name="nome" id="idnome" 
+                                   class="form-control" value="${perfil.nome}">
+                            
                         </div>
                     </div>
-                        
                     <div class="form-group row offset-md-2 mt-3">
-                        <label for="iddata" class="col-md-2 form-label btn btn-primary btn-md">Data de Cadastro</label>
+                        <label for="iddata" 
+                               class="col-md-2 form-label btn btn-primary btn-md">Data de Cadastro</label>
                         <div class="col-md-6">
                             <input type="date" name="dataCadastro" id="iddata" 
                                    class="form-control" value="${perfil.dataCadastro}">
                             
                         </div>
                     </div>
-                    <div class="form-group row offset-md-2 mt-3">
-                        <label for="idstatus" 
-                               class="col-md-2 form-label btn btn-primary btn-md">Status</label>
-                        <div class="col-md-6">
-                            <select id="idstatus" name="status"
-                                    class="form-control-sm mt-3">
-                                <option value="">Escolha uma Opção</option>
-                                <option value="1"
-                                    <c:if test="${perfil.status == 1}"> 
-                                        selected=""
-                                    </c:if>>Ativado</option>
-                                <option value="0"
-                                    <c:if test="${perfil.status == 0}">
-                                        selected=""
-                                    </c:if>>Desativado</option>
-                                
-                                
-                            </select>
-                            
-                        </div>
-                    </div>
+                    
                     <div class="d-md-flex justify-content-md-end mr-3">
                         <button  class="btn btn-primary btn-md mr-2">
                             Gravar&nbsp;
@@ -110,3 +97,4 @@
             
     </body>
 </html>
+

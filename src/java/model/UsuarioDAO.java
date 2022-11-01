@@ -153,7 +153,7 @@ public class UsuarioDAO {
         rs = ps.executeQuery();
         if (rs.next()) {
             user.setIdUsuario(rs.getInt("idUsuario"));
-            user.setNome(rs.getString("idUsuario"));
+            user.setNome(rs.getString("nome"));
             user.setLogin(rs.getString("login"));
             user.setSenha(rs.getString("senha"));
             user.setStatus(rs.getInt("status"));

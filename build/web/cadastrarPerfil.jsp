@@ -44,17 +44,15 @@
                            value="${perfil.idPerfil}">
                     
                     <div class="form-group row offset-md-2 mt-4">
-                        <label for="idnome" 
-                               class="col-md-2 form-label btn btn-primary btn-md">Nome</label>
+
+                        <label for="idnome"class="col-md-2 form-label btn btn-primary btn-md">Nome</label>
                         <div class="col-md-6">
-                            <input type="text" name="nome" id="idnome" 
-                                   class="form-control" value="${perfil.nome}">
-                            
+                            <input type="text" name="nome" id="idnome" class="form-control" value="${perfil.nome}"> 
                         </div>
                     </div>
+                        
                     <div class="form-group row offset-md-2 mt-3">
-                        <label for="iddata" 
-                               class="col-md-2 form-label btn btn-primary btn-md">Data de Cadastro</label>
+                        <label for="iddata" class="col-md-2 form-label btn btn-primary btn-md">Data de Cadastro</label>
                         <div class="col-md-6">
                             <input type="date" name="dataCadastro" id="iddata" 
                                    class="form-control" value="${perfil.dataCadastro}">
