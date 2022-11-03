@@ -18,6 +18,21 @@
         <title>Cadastro de Perfil</title>
     </head>
     <body>
+          <%
+        //Http 1.1
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        //HTTP 1.0
+        response.setHeader("Pragma", "no-cache");
+        //Proxie
+        response.setHeader("Expires", "0");
+        
+        if(session.getAttribute("ulogado") == null){
+            response.sendRedirect("formLogin.jsp");
+        }
+        
+        
+        
+        %>
         <%
             String msg = (String) request.getAttribute("msg");
             if(msg != null){

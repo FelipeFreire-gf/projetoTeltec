@@ -18,7 +18,7 @@ import model.Perfil;
 
 /**
  *
- * @author felip
+ * @author ltp3etb
  */
 @WebServlet(name = "GerenciarUsuario", urlPatterns = {"/gerenciarUsuario"})
 public class GerenciarUsuario extends HttpServlet {
@@ -88,9 +88,17 @@ public class GerenciarUsuario extends HttpServlet {
             "location.href='gerenciarUsuario?acao=listar';" +
             "</script>"
         
-        ); 
+        );
+        
+        
+        
+        
+        
+        
+       
     }
 
+   
     @Override
     protected void doPost(HttpServletRequest request, 
         HttpServletResponse response)

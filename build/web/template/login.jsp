@@ -28,13 +28,9 @@
                 </div>
 
                 <!-- FORM DO LOGIN -->
-                <form action="gerenciarLogin" method="POST"accept-charset="iso-8859-1,utf-8" >
-                    <label for="idlogin" class="fadeIn second"></label>
-                    <input type="text" id="idlogin" class="fadeIn second" name="credencial" placeholder="Credencial">
-                   
-                    <label for="idsenha" class="fadeIn second"></label>
-                    <input type="password" id="idsenha" class="fadeIn third" name="login" placeholder="Senha">
-                    
+                <form>
+                    <input type="text" id="login" class="fadeIn second" name="login" placeholder="Credencial">
+                    <input type="text" id="password" class="fadeIn third" name="login" placeholder="Senha">
                     <input type="submit" class="fadeIn fourth" value="Entrar">
                 </form>
 

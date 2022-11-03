@@ -16,6 +16,21 @@
         <title>Cadastro de Perfil</title>
     </head>
     <body>
+          <%
+        //Http 1.1
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        //HTTP 1.0
+        response.setHeader("Pragma", "no-cache");
+        //Proxie
+        response.setHeader("Expires", "0");
+        
+        if(session.getAttribute("ulogado") == null){
+            response.sendRedirect("formLogin.jsp");
+        }
+        
+        
+        
+        %>
         <%
             String msg = (String) request.getAttribute("msg");
             if(msg != null){
@@ -34,7 +49,6 @@
             <div id="menu">
                 <jsp:include page="template/menu.jsp"></jsp:include>
             </div>
-            
             <div id="conteudo" class="bg-background">
                 <form action="gerenciarPerfil" method="POST" 
                       accept-charset="iso-8859-1,utf-8">
@@ -44,15 +58,17 @@
                            value="${perfil.idPerfil}">
                     
                     <div class="form-group row offset-md-2 mt-4">
-
-                        <label for="idnome"class="col-md-2 form-label btn btn-primary btn-md">Nome</label>
+                        <label for="idnome" 
+                               class="col-md-2 form-label btn btn-primary btn-md">Nome</label>
                         <div class="col-md-6">
-                            <input type="text" name="nome" id="idnome" class="form-control" value="${perfil.nome}"> 
+                            <input type="text" name="nome" id="idnome" 
+                                   class="form-control" value="${perfil.nome}">
+                            
                         </div>
                     </div>
-                        
                     <div class="form-group row offset-md-2 mt-3">
-                        <label for="iddata" class="col-md-2 form-label btn btn-primary btn-md">Data de Cadastro</label>
+                        <label for="iddata" 
+                               class="col-md-2 form-label btn btn-primary btn-md">Data de Cadastro</label>
                         <div class="col-md-6">
                             <input type="date" name="dataCadastro" id="iddata" 
                                    class="form-control" value="${perfil.dataCadastro}">

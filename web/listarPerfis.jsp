@@ -2,11 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0",
               shrink-to-fit=no>
@@ -16,9 +16,24 @@
         <link rel="stylesheet" href="css/styles.css" type="text/css">
         <link rel="stylesheet" href="datatables/css/dataTables.bootstrap4.min.css" type="text/css">
         <link rel="stylesheet" href="datatables/css/jquery.dataTables.min.css" type="text/css">
-        <title>Listar Perfis</title>
+        <title>Projeto ETB</title>
     </head>
     <body>
+            <%
+        //Http 1.1
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        //HTTP 1.0
+        response.setHeader("Pragma", "no-cache");
+        //Proxie
+        response.setHeader("Expires", "0");
+        
+        if(session.getAttribute("ulogado") == null){
+            response.sendRedirect("formLogin.jsp");
+        }
+        
+        
+        
+        %>
         <div id="container">
             
             <div id="header">
@@ -44,7 +59,6 @@
                                    id="listarPerfis">
                                 <thead class="bg-primary">
                                     <tr class="text-white">
-                                        <th>Código</th>
                                         <th>Nome</th>
                                         <th>Data de Cadastro</th>
                                         <th>Status</th>
@@ -54,7 +68,6 @@
                                 <tbody>
                                 <c:forEach items="${perfis}" var="p">
                                     <tr>
-                                        <td>${p.idPerfil}</td>
                                         <td>${p.nome}</td>
                                         <td>
                                             <fmt:formatDate pattern = "dd/MM/yyyy" value = "${p.dataCadastro}" />
@@ -87,8 +100,16 @@
                                                 }
                                             </script>
                                             <a href="gerenciarPerfil?acao=alterar&idPerfil=${p.idPerfil}"
-                                               class="btn btn-primary btn-sm" role="button">
-                                                Alterar&nbsp;<i class="fa-solid fa-pen-to-square"></i>
+                                               class="btn btn-primary btn-sm" 
+                                               role="button">
+                                               Alterar&nbsp;
+                                               <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <a href="gerenciarMenuPerfil?acao=vincular&idPerfil=${p.idPerfil}"
+                                               class="btn btn-secondary btn-sm" 
+                                               role="button">
+                                               Vincular&nbsp;
+                                               <i class="fas fa-user-tag"></i>
                                             </a>
                                             <c:choose>
                                                 <c:when test="${p.status == 1}">
@@ -126,9 +147,9 @@
             
             
             
-        </div>
+        </div><!-- fim da div container -->
         
-        <!--JQuery.js -->
+       <!--JQuery.js -->
         <script src="js/jquery.min.js"></script>
         <!--Popper.js via cdn -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha512-Ua/7Woz9L5O0cwB/aYexmgoaD7lw3dWe9FvXejVdgqu71gRog3oJgjSWQR55fwWx+WKuk8cl7UwA1RS6QCadFA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -136,34 +157,37 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="datatables/js/jquery.dataTables.min.js"></script>
         <script src="datatables/js/dataTables.bootstrap4.min.js"></script>
-       
+        
         <script type="text/javascript">
              $(document).ready(function () {
-                                    $("#listarPerfis").dataTable({
-                                        "bJQueryUI": true,
-                                        "lengthMenu": [[5, 10, 20, 25, -1], [5, 10, 20, 25, "Todos"]],
-                                        "oLanguage": {
-                                            "sProcessing": "Processando..",
-                                            "sLengthMenu": "Mostrar _MENU_ registros",
-                                            "sZeroRecords": "Não foram encontrados resultados",
-                                            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                                            "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
-                                            "sInfoFiltered": "",
-                                            "sInfoPostFix": "",
-                                            "sSearch": "Pesquisar",
-                                            "sUrl": "",
-                                            "oPaginate": {
-                                                "sFirst": "Primeiro",
-                                                "sPrevious": "Anterior",
-                                                "sNext": "Próximo",
-                                                "sLast": "Último"
-                                            }
-
-                                        }
-                                    });
-                                }); 
+                $("#listarPerfis").DataTable({
+                    "bJQueryUI": true,
+                    "lengthMenu": [[5, 10, 20, 25, -1], [5, 10, 20, 25, "Todos"]],
+                        "oLanguage": {
+                            "sProcessing": "Processando..",
+                            "sLengthMenu": "Mostrar _MENU_ registros",
+                            "sZeroRecords": "Não foram encontrados resultados",
+                            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                            "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+                            "sInfoFiltered": "",
+                            "sInfoPostFix": "",
+                            "sSearch": "Pesquisar",
+                            "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "Primeiro",
+                            "sPrevious": "Anterior",
+                            "sNext": "Próximo",
+                            "sLast": "Último"
+                            }
+                        }
+                    });
+                }); 
             </script>
               
+        
     </body>
+    
+        
+    
 </html>
 

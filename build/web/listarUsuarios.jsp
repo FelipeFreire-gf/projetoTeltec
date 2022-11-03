@@ -17,9 +17,24 @@
         <link rel="stylesheet" href="css/styles.css" type="text/css">
         <link rel="stylesheet" href="datatables/css/dataTables.bootstrap4.min.css" type="text/css">
         <link rel="stylesheet" href="datatables/css/jquery.dataTables.min.css" type="text/css">
-        <title>Listar Usuarios</title>
+        <title>Projeto ETB</title>
     </head>
     <body>
+          <%
+        //Http 1.1
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        //HTTP 1.0
+        response.setHeader("Pragma", "no-cache");
+        //Proxie
+        response.setHeader("Expires", "0");
+        
+        if(session.getAttribute("ulogado") == null){
+            response.sendRedirect("formLogin.jsp");
+        }
+        
+        
+        
+        %>
         <div id="container">
             
             <div id="header">
@@ -45,7 +60,6 @@
                                    id="listarUsuarios">
                                 <thead class="bg-primary">
                                     <tr class="text-white">
-                                        <th>Código</th>
                                         <th>Nome</th>
                                         <th>Login</th>
                                         <th>Status</th>

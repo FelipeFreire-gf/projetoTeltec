@@ -1,9 +1,3 @@
-<%-- 
-    Document   : formLogin
-    Created on : 01/11/2022, 13:50:57
-    Author     : felip
---%>
-
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -17,72 +11,89 @@
               shrink-to-fit=no">
         <link rel="stylesheet" href="bootstrap/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="fonts/css/all.css" type="text/css">
-        <link rel="stylesheet" href="css/menu.css" type="text/css">
+     
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        
+           <link rel="stylesheet" href="css/menu.css" type="text/css">
         <link rel="stylesheet" href="css/styles.css" type="text/css">
-        <title>Cadastro de Perfil</title>
+        
+        <title>LOGIN TESTE</title>
     </head>
     <body>
         <%
             String msg = (String) request.getAttribute("msg");
             if(msg != null){
                 out.println(
-                   "<script type='text/javascript'>" +
-                   "alert('" + msg + "');" +
-                   "</script>");
+                        "<script type='text/javascript'>" +
+                        "alert('" +msg+ "');" +
+                        "history.back();" +
+                        "</script>"                
+                );
             }
             
+         %>
+         <% 
+            String mensagem = 
+                (String)request.getSession().getAttribute("mensagem");
+            
+            if(mensagem != null){
+                
+                request.getSession().removeAttribute("mensagem");
         %>
+        
+        <div class="alert alert-info" role="alert">
+             <%= mensagem %>
+         </div>
+         
+        <% 
+            }
+        %>
+         
+         
+         
+        
         <div id="container">
             
-            <div id="header">
-                <jsp:include page="template/banner.jsp"></jsp:include>
-            </div>
+            
             <div id="menu">
                 <jsp:include page="template/menu.jsp"></jsp:include>
             </div>
+  
             
-            <div id="conteudo" class="bg-background">
-                <form action="gerenciarLogin" method="POST"accept-charset="iso-8859-1,utf-8">
-                    <h3 class="text-center mt-5">Pagina Login</h3>
-                    
-                    <input type="hidden" id="idperfil" name="idPerfil" 
-                           value="${perfil.idPerfil}">
-                    
-                    <div class="form-group row offset-md-2 mt-4">
-                        <label for="idnome" 
-                               class="col-md-2 form-label btn btn-primary btn-md">Nome</label>
-                        <div class="col-md-6">
-                            <input type="text" name="nome" id="idnome" 
-                                   class="form-control" value="${perfil.nome}">
-                            
-                        </div>
-                    </div>
-                    <div class="form-group row offset-md-2 mt-3">
-                        <label for="iddata" 
-                               class="col-md-2 form-label btn btn-primary btn-md">Data de Cadastro</label>
-                        <div class="col-md-6">
-                            <input type="date" name="dataCadastro" id="iddata" 
-                                   class="form-control" value="${perfil.dataCadastro}">
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="d-md-flex justify-content-md-end mr-3">
-                        <button  class="btn btn-primary btn-md mr-2">
-                            Gravar&nbsp;
-                            <i class="fa-solid fa-floppy-disk"></i>
-                        </button>
-                        <a href="gerenciarPerfil?acao=listar"
-                           class="btn btn-warning btn-md" role="button">
-                            Voltar&nbsp;<i class="fa-solid fa-rotate-left"></i>
-                            
-                        </a>
-                        
-                    </div>
-                    
-                    
-                    
+    <div class="wrapper fadeInDown">
+            <div id="formContent">
+
+                <!-- ICONE -->
+                <div class="fadeIn first">
+                    <img src="imagens/qwer.PNG" id="icon" alt="icone" />
+                </div>
+
+
+<!-- FORM DO LOGIN -->
+                <form action="gerenciarLogin" method="POST"accept-charset="iso-8859-1,utf-8" >
+                    <label for="idLogin" class="fadeIn second"></label>
+                    <input type="text" id="idLogin" class="fadeIn second" name="login" placeholder="Credencial">
+
+                    <label for="idsenha" class="fadeIn second"></label>
+                    <input type="password" id="idSenha" class="fadeIn third" name="senha" placeholder="Senha">
+
+                    <input type="submit" class="fadeIn fourth" value="Entrar">
                 </form>
+
+
+                <!-- ALGUMAS MENSSAGENS -->
+                <div id="formFooter">
+                    <a class="underlineHover" href="#">ÁREA RESTRITA</a>
+                </div>
+
+            </div>
+        </div>
+ <%-- ========================================================================================================= --%>                    
+                    
+             
                 
             </div>
             
@@ -95,6 +106,11 @@
         <!-- Bootstrap.js -->
         <script src="js/bootstrap.min.js"></script>
             
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+        
     </body>
 </html>
-

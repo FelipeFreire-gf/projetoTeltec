@@ -75,6 +75,9 @@ public class PerfilDAO {
            p.setNome(rs.getString("nome"));
            p.setDataCadastro(rs.getDate("dataCadastro"));
            p.setStatus(rs.getInt("status"));
+           p.setMenus(menusVinculadosPorPerfil(idPerfil));
+           p.setNaoMenus(menusNaoVinculadosPorPerfil(idPerfil));
+          
         }
         
         ConexaoFactory.close(con);
@@ -102,10 +105,8 @@ public class PerfilDAO {
         ConexaoFactory.close(con);
         return true;
     }
-
-// =============================================================================    
-
-public ArrayList<Menu> menusVinculadosPorPerfil(int idPerfil)
+    
+    public ArrayList<Menu> menusVinculadosPorPerfil(int idPerfil)
         throws SQLException{
         ArrayList<Menu> lista = new ArrayList<>();
         sql = "SELECT m.idMenu, m.nome, m.link, m.icone, m.exibir, m.status " +
@@ -129,7 +130,8 @@ public ArrayList<Menu> menusVinculadosPorPerfil(int idPerfil)
         }
         ConexaoFactory.close(con);
         
-        return lista;  
+        return lista;
+        
     }
     
     public ArrayList<Menu> menusNaoVinculadosPorPerfil(int idPerfil)
@@ -158,9 +160,13 @@ public ArrayList<Menu> menusVinculadosPorPerfil(int idPerfil)
         }
         ConexaoFactory.close(con);
         
-        return lista;     
+        return lista;
+        
     }
-
+            
+    
+  
+    
     public boolean vincular(int idMenu, int idPerfil)
         throws SQLException{
         sql = "INSERT INTO menu_perfil (idMenu, idPerfil) " +
@@ -173,7 +179,8 @@ public ArrayList<Menu> menusVinculadosPorPerfil(int idPerfil)
         ps.executeUpdate();
         ConexaoFactory.close(con);
                 
-        return true;    
+        return true;
+        
     }
     
     public boolean desvincular(int idMenu, int idPerfil)throws SQLException{
@@ -187,5 +194,5 @@ public ArrayList<Menu> menusVinculadosPorPerfil(int idPerfil)
         return true;
     }
     
-
+    
 }

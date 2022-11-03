@@ -1,5 +1,6 @@
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+         pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
@@ -16,129 +17,141 @@
         <link rel="stylesheet" href="css/styles.css" type="text/css">
         <link rel="stylesheet" href="datatables/css/dataTables.bootstrap4.min.css" type="text/css">
         <link rel="stylesheet" href="datatables/css/jquery.dataTables.min.css" type="text/css">
-        <title>Listar Menus</title>
+        <title>Projeto ETB</title>
     </head>
     <body>
+        <%
+            //Http 1.1
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            //HTTP 1.0
+            response.setHeader("Pragma", "no-cache");
+            //Proxie
+            response.setHeader("Expires", "0");
+
+            if (session.getAttribute("ulogado") == null) {
+                response.sendRedirect("formLogin.jsp");
+            }
+
+
+        %>
         <div id="container">
-            
+
             <div id="header">
                 <jsp:include page="template/banner.jsp"></jsp:include>
-            </div>
-            <div id="menu">
+                </div>
+                <div id="menu">
                 <jsp:include page="template/menu.jsp"></jsp:include>
-            </div>
-            <div id="conteudo" class="bg-background">
-                <div class="h-100 justify-content-center align-items-center">
-                    <div class="col-12">
-                        <h3 class="text-center mt-3">Listagem de Menus</h3>
-                        <div class="col-sm-12" style="padding-bottom: 15px">
-                            <a href="cadastrarMenu.jsp"
-                                class="btn btn-primary btn-md"
-                                role="button">Cadastrar Menu&nbsp;
-                                <i class="fa-solid fa-floppy-disk"></i>
-                            
-                            </a>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover table bordered responsive" 
-                                   id="listarMenus">
-                                <thead class="bg-primary">
-                                    <tr class="text-white">
-                                        <th>Código</th>
-                                        <th>Nome</th>
-                                        <th>Link</th>
-                                        <th>Ícone</th>
-                                        <th>Exibir</th>
-                                        <th>Status</th>
-                                        <th>Ação</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${menus}" var="m">
-                                    <tr>
-                                        <td>${m.idMenu}</td>
-                                        <td>${m.nome}</td>
-                                        <td>${m.link}</td>
-                                        <td>${m.icone}</td>
-                                        <td>
-                                            <c:choose>
-                                                <c:when test="${m.exibir == 1}">
-                                                    Sim
-                                                </c:when>
-                                                <c:otherwise>
-                                                    Não
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </td>
-                                        <td>
-                                            <c:choose>
-                                                <c:when test="${m.status == 1}">
-                                                    ativado
-                                                </c:when>
-                                                <c:otherwise>
-                                                    desativado
-                                                </c:otherwise>
-                                            </c:choose>
-                                            
-                                        </td>
-                                        <td>
-                                            <script type="text/javascript">
-                                                function confirmDesativar(id, nome){
-                                                    if(confirm('Deseja desativar o menu ' +
-                                                       nome + '?')){
-                                                       location.href="gerenciarMenu?acao=desativar&idMenu="+id;
+                </div>
+                <div id="conteudo" class="bg-background">
+                    <div class="h-100 justify-content-center align-items-center">
+                        <div class="col-12">
+                            <h3 class="text-center mt-3">Listagem de Menus</h3>
+                            <div class="col-sm-12" style="padding-bottom: 15px">
+                                <a href="cadastrarMenu.jsp"
+                                   class="btn btn-primary btn-md"
+                                   role="button">Cadastrar Menu&nbsp;
+                                    <i class="fa-solid fa-floppy-disk"></i>
+
+                                </a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover table bordered responsive" 
+                                       id="listarMenus">
+                                    <thead class="bg-primary">
+                                        <tr class="text-white">
+                                            <th>Nome</th>
+                                            <th>Link</th>
+                                            <th>Ícone</th>
+                                            <th>Exibir</th>
+                                            <th>Status</th>
+                                            <th>Ação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${menus}" var="m">
+                                        <tr>
+                                            <td>${m.nome}</td>
+                                            <td>${m.link}</td>
+                                            <td>${m.icone}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${m.exibir == 1}">
+                                                        Sim
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        Não
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${m.status == 1}">
+                                                        ativado
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        desativado
+                                                    </c:otherwise>
+                                                </c:choose>
+
+                                            </td>
+                                            <td>
+                                                <script type="text/javascript">
+                                                    function confirmDesativar(id, nome) {
+                                                        if (confirm('Deseja desativar o menu ' +
+                                                                nome + '?')) {
+                                                            location.href = "gerenciarMenu?acao=desativar&idMenu=" + id;
+                                                        }
                                                     }
-                                                }
-                                                
-                                                function confirmAtivar(id, nome){
-                                                    if(confirm('Deseja ativar o menu ' +
-                                                       nome + '?')){
-                                                       location.href="gerenciarMenu?acao=ativar&idMenu="+id;
+
+                                                    function confirmAtivar(id, nome) {
+                                                        if (confirm('Deseja ativar o menu ' +
+                                                                nome + '?')) {
+                                                            location.href = "gerenciarMenu?acao=ativar&idMenu=" + id;
+                                                        }
                                                     }
-                                                }
-                                            </script>
-                                            <a href="gerenciarMenu?acao=alterar&idMenu=${m.idMenu}"
-                                               class="btn btn-primary btn-sm" role="button">
-                                                Alterar&nbsp;<i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
-                                            <c:choose>
-                                                <c:when test="${m.status == 1}">
-                                                    <button class="btn btn-danger btn-sm"
-                                                        onclick="confirmDesativar('${m.idMenu}','${m.nome}')">
-                                                        Desativar&nbsp;
-                                                        <i class="fas fa-user fa-user-lock"></i>
-                                                    </button>
-                                                    
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <button class="btn btn-success btn-sm"
-                                                        onclick="confirmAtivar('${m.idMenu}', '${m.nome}')">
-                                                        Ativar&nbsp;
-                                                        <i class="fa-solid fa-user-shield"></i>
-                                                    </button>
-                                                    
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </td>
-                                    </tr>
-                                </c:forEach>    
+                                                </script>
+                                                <a href="gerenciarMenu?acao=alterar&idMenu=${m.idMenu}"
+                                                   class="btn btn-primary btn-sm" role="button">
+                                                    Alterar&nbsp;<i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                                <c:choose>
+                                                    <c:when test="${m.status == 1}">
+                                                        <button class="btn btn-danger btn-sm"
+                                                                onclick="confirmDesativar('${m.idMenu}', '${m.nome}')">
+                                                            Desativar&nbsp;
+                                                            <i class="fas fa-user fa-user-lock"></i>
+                                                        </button>
+
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <button class="btn btn-success btn-sm"
+                                                                onclick="confirmAtivar('${m.idMenu}', '${m.nome}')">
+                                                            Ativar&nbsp;
+                                                            <i class="fa-solid fa-user-shield"></i>
+                                                        </button>
+
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>    
                                 </tbody>
                             </table>
-                            
-                            
-                            
+
+
+
                         </div><!-- fim da div responsive -->
                     </div><!-- fim da div col-12 -->
-                    
-                    
+
+
                 </div><!-- fim da div justify-content -->
-                
+
             </div><!-- fim da div content -->
-            
-            
-            
+
+
+
         </div>
-        
+
         <!--JQuery.js -->
         <script src="js/jquery.min.js"></script>
         <!--Popper.js via cdn -->
@@ -147,33 +160,33 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="datatables/js/jquery.dataTables.min.js"></script>
         <script src="datatables/js/dataTables.bootstrap4.min.js"></script>
-       
+
         <script type="text/javascript">
-             $(document).ready(function () {
-                $("#listarMenus").dataTable({
-                    "bJQueryUI": true,
-                    "lengthMenu": [[5, 10, 20, 25, -1], [5, 10, 20, 25, "Todos"]],
-                        "oLanguage": {
-                            "sProcessing": "Processando..",
-                            "sLengthMenu": "Mostrar _MENU_ registros",
-                            "sZeroRecords": "Não foram encontrados resultados",
-                            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                            "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
-                            "sInfoFiltered": "",
-                            "sInfoPostFix": "",
-                            "sSearch": "Pesquisar",
-                            "sUrl": "",
-                        "oPaginate": {
-                            "sFirst": "Primeiro",
-                            "sPrevious": "Anterior",
-                            "sNext": "Próximo",
-                            "sLast": "Último"
-                            }
-                        }
-                    });
-                }); 
-            </script>
-              
+                                                            $(document).ready(function () {
+                                                                $("#listarMenus").dataTable({
+                                                                    "bJQueryUI": true,
+                                                                    "lengthMenu": [[5, 10, 20, 25, -1], [5, 10, 20, 25, "Todos"]],
+                                                                    "oLanguage": {
+                                                                        "sProcessing": "Processando..",
+                                                                        "sLengthMenu": "Mostrar _MENU_ registros",
+                                                                        "sZeroRecords": "Não foram encontrados resultados",
+                                                                        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                                                                        "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+                                                                        "sInfoFiltered": "",
+                                                                        "sInfoPostFix": "",
+                                                                        "sSearch": "Pesquisar",
+                                                                        "sUrl": "",
+                                                                        "oPaginate": {
+                                                                            "sFirst": "Primeiro",
+                                                                            "sPrevious": "Anterior",
+                                                                            "sNext": "Próximo",
+                                                                            "sLast": "Último"
+                                                                        }
+                                                                    }
+                                                                });
+                                                            });
+        </script>
+
     </body>
 </html>
 

@@ -14,7 +14,7 @@
     <body>
 
         <div id="menu">
-            <jsp:include page="template/login.jsp"></jsp:include>
+            <jsp:include page="template/menu.jsp"></jsp:include>
         </div>
         
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

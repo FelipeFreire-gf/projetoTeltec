@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import java.util.ArrayList;
 
 @NoArgsConstructor
 @Getter
@@ -16,5 +17,6 @@ public class Perfil {
     private String nome;
     private Date dataCadastro;
     private int status;
-    
+    private ArrayList<Menu> menus;
+    private ArrayList<Menu> naoMenus;
 }

@@ -48,35 +48,48 @@ public class GerenciarMenu extends HttpServlet {
                 dispatcher.forward(request, response);
                 
             }else if(acao.equals("alterar")){
-                m = mdao.getCarregarPorId(Integer.parseInt(idMenu));
-                if(m.getIdMenu() > 0){
-                    RequestDispatcher dispatcher =
+                if(GerenciarLogin.verificarPermissao(request, response)){
+                    m = mdao.getCarregarPorId(Integer.parseInt(idMenu));
+                    if(m.getIdMenu() > 0){
+                        RequestDispatcher dispatcher =
                             getServletContext().
                                     getRequestDispatcher("/cadastrarMenu.jsp");
-                    request.setAttribute("menu", m);
-                    dispatcher.forward(request, response);
-                }else{
+                        request.setAttribute("menu", m);
+                        dispatcher.forward(request, response);
+                    }else{
                     mensagem = "Menu não encontrado na base de dados!";
-                }
-
-            }else if(acao.equals("desativar")){
-                m.setIdMenu(Integer.parseInt(idMenu));
-                if(mdao.desativar(m)){
-                    mensagem = "Menu desativado com sucesso na base de dados!";
+                    }
                     
                 }else{
-                    mensagem = "Falha ao desativar o menu da base de dados!";
+                    mensagem = "Acesso não Autorizado!";
                 }
+                
+            }else if(acao.equals("desativar")){
+                if(GerenciarLogin.verificarPermissao(request, response)){
+                    m.setIdMenu(Integer.parseInt(idMenu));
+                    if(mdao.desativar(m)){
+                        mensagem = "Menu desativado com sucesso na base de dados!";
+                    
+                    }else{
+                        mensagem = "Falha ao desativar o menu da base de dados!";
+                    }
+                }else{
+                    mensagem = "Acesso não autorizado!";
+                }
+               
                         
             }else if(acao.equals("ativar")){
-                m.setIdMenu(Integer.parseInt(idMenu));
-                if(mdao.ativar(m)){
-                    mensagem = "Menu ativado com sucesso na base de dados!";
+                if(GerenciarLogin.verificarPermissao(request, response)){
+                    m.setIdMenu(Integer.parseInt(idMenu));
+                    if(mdao.ativar(m)){
+                        mensagem = "Menu ativado com sucesso na base de dados!";
+                    }else{
+                         mensagem = "Falha ao desativar o menu da base de dados!";
+                    }
                 }else{
-                     mensagem = "Falha ao desativar o menu da base de dados!";
+                    mensagem = "Acesso não autorizado!";
                 }
-            
-            
+               
             }else{
                 response.sendRedirect("index.jsp");
             }
